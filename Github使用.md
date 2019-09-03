@@ -4,8 +4,6 @@
 
 [TOC]
 
-
-
 ### 注册登录github
 
 ### 创建新的仓库
@@ -16,12 +14,16 @@
 
     ![1567485279169](./Github使用/1567485279169.png)
 
+    
+
   * 仓库描述
 
     ![1567485428375](Github使用/1567485428375.png)
 
+  <br>
+  
   ------Description：添加仓库说明，不是必填项
-
+  
   ------Public、Private：选择公开还是非公开仓库，但是非公开仓库目前是收费的
   
   ------Initialize this repository with a README：如果选中此项，随后Github会自动初始化仓库并设置README文件，让用户可以立即clone此仓库。如果想向Github添加手中已有的Git仓库，建议不要勾选，直接手动push
@@ -30,13 +32,13 @@
   
   ------Add a license：选择要添加的许可协议文件。
   
-  
+  <br>
   
   这样我们就得到了仓库的http以及ssh的地址：
   
   ![1567485539159](Github使用/1567485539159.png)
-
-#### …or create a new repository on the command line
+<br>
+####  …or create a new repository on the command line
 
 ```
 echo "# GithubUserbook" >> README.md
@@ -46,25 +48,25 @@ git commit -m "first commit"
 git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
 git push -u origin master
 ```
-
-#### …or push an existing repository from the command line
+<br>
+####  …or push an existing repository from the command line
 ```
 git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
 git push -u origin master
 ```
-#### …or import code from another repository
+#### <br>…or import code from another repository
 
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 
 [Import code](https://github.com/weihuohuayi/GithubUserbook/import)
 
-
+<br>
 
 ### 下载Git并同步GitHub
 
 点击https://git-for-windows.github.io/进入Windows版本的Git下载，安装
 
-
+<br>
 
 #### 在本地创建ssh key：
 
@@ -82,11 +84,12 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
   cat ~/.ssh/id_rsa.pub
 
   打开id_rsa.pub 获得自己的密匙
-
+<br>
 #### Github添加公开秘钥：
 
 * 返回github，进入 Account Settings（账户配置），左边选择SSH and GPG Keys选项：
-* ![img](Github使用/1014657-20170507214931211-721227695.png)
+
+  ![img](Github使用/1014657-20170507214931211-721227695.png)
 
 title随便起个名字即可，key是第二步中的内容
 
@@ -162,11 +165,11 @@ title随便起个名字即可，key是第二步中的内容
 
 ```
 echo "# GithubUserbook" >> README.md
-git init
-git add README.md
+git init     //把这个目录变成Git可以管理的仓库
+git add README.md      //文件添加到仓库
 git commit -m "first commit"
 git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
-git push -u origin master
+git push -u origin master   //把本地库的所有内容推送到远程库上
 ```
 
 
@@ -176,7 +179,25 @@ git push -u origin master
 <font color='Brown'>**推送成功 !**</font>
 
 3. 将所有文件添加到仓库，并推送到Github
-   * 
 
-将所有文件添加到仓库
+   ```
+   git add .
+   git commit -m "初次添加本文件夹所有文件到本地仓库"
+   ```
+
+   
+
+   完成本地仓库的文件添加，初步建全文件
+
+4. 本地仓库关联GitHub的仓库
+
+   ```
+   git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
+   ```
+
+   
+
+
+
+
 
