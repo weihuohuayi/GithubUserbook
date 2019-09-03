@@ -38,6 +38,9 @@
   
   ![1567485539159](Github使用/1567485539159.png)
 <br>
+
+
+
 ####  …or create a new repository on the command line
 
 ```
@@ -49,18 +52,27 @@ git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
 git push -u origin master
 ```
 <br>
+
+
+
 ####  …or push an existing repository from the command line
 ```
 git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
 git push -u origin master
 ```
-#### <br>…or import code from another repository
+#### <br>
+
+
+
+#### …or import code from another repository
 
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 
 [Import code](https://github.com/weihuohuayi/GithubUserbook/import)
 
 <br>
+
+
 
 ### 下载Git并同步GitHub
 
@@ -85,17 +97,20 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
 
   打开id_rsa.pub 获得自己的密匙
 <br>
+
+
+
 #### Github添加公开秘钥：
 
 * 返回github，进入 Account Settings（账户配置），左边选择SSH and GPG Keys选项：
 
   ![img](Github使用/1014657-20170507214931211-721227695.png)
-
-title随便起个名字即可，key是第二步中的内容
-
-成功后出现指纹 Fingerprint
-
-![img](https://images2015.cnblogs.com/blog/1014657/201705/1014657-20170507215049961-118690808.png)
+  
+  ​	title随便起个名字即可，key是第二步中的内容
+  
+  ​	成功后出现指纹 Fingerprint
+  
+  ![img](https://images2015.cnblogs.com/blog/1014657/201705/1014657-20170507215049961-118690808.png)
 
 #### 本地验证是否绑定本地成功
 
