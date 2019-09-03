@@ -111,6 +111,16 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
   ​	成功后出现指纹 Fingerprint
   
   ![img](https://images2015.cnblogs.com/blog/1014657/201705/1014657-20170507215049961-118690808.png)
+  
+  
+  
+  * 为什么GitHub需要SSH Key呢？
+  
+    因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
+  
+  * 当然，GitHub允许你添加多个Key
+  
+    假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
 
 #### 本地验证是否绑定本地成功
 
@@ -217,10 +227,41 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
    git push -u origin master
    ```
 
+   将本地的`master`分支推送到`origin`主机，-u 表示指定了`origin`为默认主机。
    
+   ```
+   git push origin master
+   ```
+   
+   完成了默认主机指定后，就可以单纯使用`git push`推送了。
+
+
+### 文件的维护
+#### 文件的修改与提交
+
+当完成所有文件的初始提交后，下一步我们会对文件内容进行修改更新。于是需要将本地更新文件进行远程同步。
+
+1. 文件修改
+   * 打开文档，添加信息，保存退出
+2. 查看本地库中文件的状态
+   * git status    告诉你有哪个文件被修改过
+   * git diff    可以查看修改内容
+3. 提交修改
+   * git add
+   * git commit -m ''
+4. 查看提交日志
+   * git log
+
+#### 克隆远程库
+```
+git clone git@github.com:weihuohuayi/gitbook.git
+```
 
 
 
-其他命令参考
+### 分支管理
 
-https://www.cnblogs.com/m-bianbian/p/6822798.html
+https://www.liaoxuefeng.com/wiki/896043488029600/896954848507552
+
+
+
