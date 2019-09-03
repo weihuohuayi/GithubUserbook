@@ -1,0 +1,182 @@
+
+
+## Github 的使用笔记
+
+[TOC]
+
+
+
+### 注册登录github
+
+### 创建新的仓库
+
+* 点击“New repository”创建一个新的仓库：
+
+  * 仓库名称，与后期的仓库地址有关
+
+    ![1567485279169](./Github使用/1567485279169.png)
+
+  * 仓库描述
+
+    ![1567485428375](Github使用/1567485428375.png)
+
+  ------Description：添加仓库说明，不是必填项
+
+  ------Public、Private：选择公开还是非公开仓库，但是非公开仓库目前是收费的
+  
+  ------Initialize this repository with a README：如果选中此项，随后Github会自动初始化仓库并设置README文件，让用户可以立即clone此仓库。如果想向Github添加手中已有的Git仓库，建议不要勾选，直接手动push
+  
+  ------Add.gitignore：初始化自动生成.gitignore文件（该文件用来描述Git仓库中不需要管理的文件与目录）省去了每次根据框架进行设置的麻烦
+  
+  ------Add a license：选择要添加的许可协议文件。
+  
+  
+  
+  这样我们就得到了仓库的http以及ssh的地址：
+  
+  ![1567485539159](Github使用/1567485539159.png)
+
+#### …or create a new repository on the command line
+
+```
+echo "# GithubUserbook" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
+git push -u origin master
+```
+
+#### …or push an existing repository from the command line
+```
+git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
+git push -u origin master
+```
+#### …or import code from another repository
+
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+[Import code](https://github.com/weihuohuayi/GithubUserbook/import)
+
+
+
+### 下载Git并同步GitHub
+
+点击https://git-for-windows.github.io/进入Windows版本的Git下载，安装
+
+
+
+#### 在本地创建ssh key：
+
+* 右键 → git-bash
+* 设置SSH_Key
+
+$ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@youremail.com)"
+
+使用自己注册时候的邮箱
+
+![1567485894532](Github使用/1567485894532.png)
+
+* 查看秘钥
+
+  cat ~/.ssh/id_rsa.pub
+
+  打开id_rsa.pub 获得自己的密匙
+
+#### Github添加公开秘钥：
+
+* 返回github，进入 Account Settings（账户配置），左边选择SSH and GPG Keys选项：
+* ![img](Github使用/1014657-20170507214931211-721227695.png)
+
+title随便起个名字即可，key是第二步中的内容
+
+成功后出现指纹 Fingerprint
+
+![img](https://images2015.cnblogs.com/blog/1014657/201705/1014657-20170507215049961-118690808.png)
+
+#### 本地验证是否绑定本地成功
+
+* 在git-bash中验证，输入指令：
+  $ ssh -T git@github.com
+  如果第一次执行该指令，则会提示是否continue继续，如果我们输入yes就会看到成功信息：
+
+#### 配置gitbash本地客户端
+
+*  <font color='Brown'>**设置姓名和邮箱地址**</font>
+
+  * 由于GitHub每次执行commit操作时，都会记录username和email，所以要设置它们：
+
+    git config --global user.name 'yourname'
+
+    git config --global user.email 'youremail@youremail.com'
+
+* 提高，命令输出的可读性
+
+  git config --global color.ui auto
+
+#### 连接仓库
+
+1. Github仓库的项目的路径
+
+![1567490137673](Github使用/1567490137673.png)
+
+2. 创建本地仓库并上传github
+
+   * 我们需要将本地仓库上传至GitHub
+     * 建立本地仓库
+     * 创建了一个名为“Github使用”的文件夹
+     * 其下创建一些文件
+     * 文件夹内右键 → git-bash
+   
+   ![1567490263167](Github使用/1567490263167.png)
+   
+   * 在本地创建一个文件
+   
+     * *echo* : 输出文字到控制台
+     * echo "# GithubUserbook": 输出文字标题‘GithubUserbook’到控制台，并赋值到README文件
+   
+   * 初始化本地仓库
+   
+     * git init
+   
+     * 得到一个隐藏的.git文件夹，该文件夹是Git用来跟踪管理版本库的
+   
+       ![1567491394252](Github使用/1567491394252.png)
+   
+   * 添加README文件到本地仓库
+   
+     * git add README.md
+   
+   * 添加这一步的注释
+   
+     * git commit -m "first commit"
+   
+   * 远程库的地址
+   
+     * ![1567490137673](Github使用/1567490137673.png)
+     * https://github.com/weihuohuayi/GithubUserbook.git
+   
+   * 推送
+   
+     * git push -u origin master
+
+```
+echo "# GithubUserbook" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
+git push -u origin master
+```
+
+
+
+![1567490876083](Github使用/1567490876083.png)
+
+<font color='Brown'>**推送成功 !**</font>
+
+3. 将所有文件添加到仓库，并推送到Github
+   * 
+
+将所有文件添加到仓库
+
