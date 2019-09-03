@@ -154,38 +154,37 @@ title随便起个名字即可，key是第二步中的内容
    
      * git commit -m "first commit"
    
+   * git add 将文件假如暂存区，在通过git commit 命令提交，添加成功后，可以通过git log命令查看提交日志
+   
    * 远程库的地址
    
      * ![1567490137673](Github使用/1567490137673.png)
      * https://github.com/weihuohuayi/GithubUserbook.git
    
    * 推送
-   
+
      * git push -u origin master
-
-```
-echo "# GithubUserbook" >> README.md
-git init     //把这个目录变成Git可以管理的仓库
-git add README.md      //文件添加到仓库
-git commit -m "first commit"
-git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
-git push -u origin master   //把本地库的所有内容推送到远程库上
-```
-
-
-
-![1567490876083](Github使用/1567490876083.png)
-
-<font color='Brown'>**推送成功 !**</font>
-
+   
+        ```
+        echo "# GithubUserbook" >> README.md
+        git init     //把这个目录变成Git可以管理的仓库
+        git add README.md      //文件添加到仓库
+        git commit -m "first commit"//-m参数后的"First commit"称作提交信息，是对此次提交的描述
+        git status //查看提交后的状态,一般可跳过
+        git remote add origin https://github.com/weihuohuayi/GithubUserbook.git
+        git push -u origin master   //把本地库的所有内容推送到远程库上
+        ```
+     
+     ![1567490876083](Github使用/1567490876083.png)
+     
+     <font color='Brown'>**推送成功 !**</font>
+   
 3. 将所有文件添加到仓库，并推送到Github
 
    ```
    git add .
    git commit -m "初次添加本文件夹所有文件到本地仓库"
    ```
-
-   
 
    完成本地仓库的文件添加，初步建全文件
 
@@ -197,7 +196,16 @@ git push -u origin master   //把本地库的所有内容推送到远程库上
 
    
 
+5. 提交文件，同步仓库
+
+   ```
+   git push -u origin master
+   ```
+
+   
 
 
 
+其他命令参考
 
+https://www.cnblogs.com/m-bianbian/p/6822798.html
