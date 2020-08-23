@@ -274,7 +274,27 @@ keywords: Git使用手册
 
           - >  这里不能用HEAD而必须使用 commit id ，因为最新版本在之前返回时已经被删除了，1094a就是最新版本的 commit id，可以在之前的代码中查到
 
-          - 
+      5. `git reset`使用图示
+
+          - ![img](img/18747624-3329e55d0a95f128.png)
+
+          - 其中：A 和 B 是正常提交，而 C 和 D 是错误提交。现在，我们想把 C 和 D 回退掉。而此时，HEAD 指针指向 D 提交（5lk4er）。我们只需将 HEAD 指针移动到 B 提交（a0fvf8），就可以达到目的。
+
+          - ~~~bash
+             $ git reset --hard a0fvf8
+             ~~~
+
+          - 命令运行之后，HEAD 指针就会移动到 B 提交下
+
+          - <img src="img/18747624-5840c2017c6964b2.png" alt="img" style="zoom:80%;" />
+
+          - 而这个时候，远程仓库的 HEAD 指针依然不变，仍在 D 提交上。所以，如果直接使用`git push`命令的话，将无法将更改推到远程仓库。此时，只能使用`-f` 选项将提交强制推到远程仓库：
+
+          - ~~~bash
+             $ git push -f
+             ~~~
+
+      6. `git revert`
 
 
 
@@ -409,28 +429,17 @@ A --> B4(gitee)
       > .sh/
       > ~~~
 
+---
 
 
 
+## 功能分支工作流
+
+<img src="./img/v2-71801fd1e3238598699f2b4459302036_720w.jpg" alt="img" style="zoom:150%;" />
 
 
 
-
-
-
-
-
-
- git 学习网站，依据你提交的信息，实时展示当前的分支情况
-
-https://link.zhihu.com/?target=https%3A//learngitbranching.js.org/
-
-<div>
-    <span class="LinkCard-content"><span class="LinkCard-text"><span class="LinkCard-title" data-text="true">Learn Git Branching</span><span class="LinkCard-meta"><span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path></svg></span>learngitbranching.js.org</span></span><span class="LinkCard-imageCell"><img class="LinkCard-image LinkCard-image--horizontal" alt="图标" src="https://pic4.zhimg.com/v2-8e7132076f76bc1c65eb1f41d15e1aa8_180x120.jpg"></span></span>
-</div>
-<div>
-    <video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/SD/e8c7e5dc-6c3e-11ea-87d6-82c305a5f28d.mp4?disable_local_cache=1&amp;bu=http-com&amp;expiration=1598202560&amp;auth_key=1598202560-0-0-f2bb2e4bab5e7241e2fa3c08f46a2508&amp;f=mp4&amp;v=hw" style="object-fit: contain;"></video>
-</div>
+---
 
 
 
@@ -446,9 +455,55 @@ https://link.zhihu.com/?target=https%3A//learngitbranching.js.org/
 
 在 版本回填退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
 
+Gitflow 工作流是目前非常成熟的一个方案，它定义了一个围绕项目发布的严格分支模型，通过为代码研发、项目发布以及维护分配独立的分支来让项目的迭代过程更加地顺畅，不同于之前的集中式工作流以及功能分支工作流，gitflow 工作流常驻的分支有两个：主干分支 master、开发分支 dev，此外针对项目研发的各个阶段，设定了特定的分支。
+
+> **阶段分支**常驻 master、dev 研发 feature 热修复 hotfix 发布 release
+
+<img src="./img/v2-392d33ec8ce48137b8c3bb35284f7caf_720w.jpg" alt="img" style="zoom:150%;" />
+
+<img src="img/18747624-2271fe92cb80f2fb.png" alt="img" style="zoom:150%;" />
+
+从上图可以看到主要包含下面几个分支：
+ `master` : 主分支，主要用来版本发布。
+ `develop`：日常开发分支，该分支正常保存了开发的最新代码。
+ `feature`：具体的功能开发分支，只与 develop 分支交互。
+ `release`：`release`分支可以认为是`master` 分支的未测试版。比如说某一期的功能全部开发完成，那么就将 `develop` 分支合并到 `release` 分支，测试没有问题并且到了发布日期就合并到`master` 分支，进行发布。
+ `hotfix`：线上 bug 修复分支。
+ 除此之后还可以有 `fast-track` 等分支。
 
 
-### 查看分支
+
+##### 主分支
+
+主分支包括 `master` 分支和 `develop` 分支。`master` 分支用来发布，`HEAD` 就是当前线上的运行代码。`develop`分支就是我们的日常开发。使用这两个分支就具有了最简单的开发模式：`develop`分支用来开发功能，开发完成并且测试没有问题则将 `develop`分支的代码合并到 `master`分支并发布。
+
+![img](https:////upload-images.jianshu.io/upload_images/18747624-c4421d847e40f977.png?imageMogr2/auto-orient/strip|imageView2/2/w/534/format/webp)
+
+
+
+这引入了几个问题：
+
+`develop`分支只有发布完了才能进行下一个版本开发，开发会比较缓慢。
+ 线上代码出现 bug 如何进行 bug 修复。
+ 带着这两个问题往下看。
+
+##### 辅助分支
+
+主要介绍的辅助分支如下：
+ `feature`分支
+ `release`分支
+ `hotfix`分支
+ 通过这些分支，我们可以做到：团队成员之间并行开发，`feature track`更加容易，开发和发布并行以及线上问题修复。
+
+###### Feature 分支
+
+**`feature`分支用来开发具体的功能，一般 fork 自 `develop`分支，最终可能会合并到`develop`分支。**比如我们要在下一个版本增加`功能1`、`功能2`、`功能3`。那么我们就可以起三个`feature`分支：`feature1`，`feature2`，`feature3`。（`feature`分支命名最好能够自解释，这并不是一种好的命名。）随着我们开发，`功能1`和`功能2`都被完成了，而`功能3`因为某些原因完成不了，那么最终 `feature1` 和 `feature2`分支将被合并到 `develop`分支，而 `feature3`分支将被干掉。
+
+![img](https:////upload-images.jianshu.io/upload_images/18747624-c7cefa74f7bd1b0a.png?imageMogr2/auto-orient/strip|imageView2/2/w/266/format/webp)
+
+
+
+### 一、查看分支
 
 ~~~bash
 # 列出所有本地分支
@@ -463,25 +518,26 @@ $ git branch -a
 
 
 
+### 二、创建分支
+
+首先，我们来创建dev分支，然后切换到dev分支上。如下操作：
+
+- ~~~bash
+   $ git branch dev         //创建dev分支
+   $ git checkout dev       //切换到dev分支
+   ~~~
+
+- ~~~bash
+   $ git checkout –b dev     //创建+切换分支
+   $ git merge name          //合并某分支到当前分支
+   $ git branch –d name      //删除分支
+   ~~~
+
+- 
 
 
 
-
-
-
-### 创建分支
-
-1. 首先，我们来创建dev分支，然后切换到dev分支上。如下操作：
-
-
-
-
-
-
-
-
-
-### 一、分支的合并
+### 三、分支的合并
 
 
 
@@ -635,32 +691,6 @@ git cherry-pick commit1
 ```
 
 
-### 20190118-修改GitHub已提交的用户名和邮箱
-
-参考链接：（亲测有效）
-
-- [修改Git全部Commit提交记录的用户名Name和邮箱Email](https://cloud.tencent.com/developer/article/1352623)
-
-- [Mac 运行sh文件，也就是传说中的shell脚本](https://blog.csdn.net/yusufolu9/article/details/53706269)
-
-
-## git客户端推荐
-
-市面上的Git客户端我基本都用过了，我最推荐的一款Git客户端是：[Tower](https://www.git-tower.com) 或者 [Fork](https://git-fork.com)。
-
-- GitUp：<https://gitup.co/>
-
-20180623时，网上看了下Git客户端的推荐排名：
-
-![](http://img.smyhvae.com/20180623_1210.png)
-
-**SmartGit**：
-
-商业用途收费， 个人用户免费：
-s
-![](http://img.smyhvae.com/20180623_1305.png)
-
-
 
 
 
@@ -672,11 +702,15 @@ s
 
 ## 推荐连接
 
+ [git 学习网站，依据你提交的信息，实时展示当前的分支情况](https://link.zhihu.com/?target=https%3A//learngitbranching.js.org/)
 
-### 2018-06
+<div>
+    <span class="LinkCard-content"><span class="LinkCard-text"><span class="LinkCard-title" data-text="true">Learn Git Branching</span><span class="LinkCard-meta"><span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path></svg></span>learngitbranching.js.org</span></span><span class="LinkCard-imageCell"><img class="LinkCard-image LinkCard-image--horizontal" alt="图标" src="https://pic4.zhimg.com/v2-8e7132076f76bc1c65eb1f41d15e1aa8_180x120.jpg"></span></span>
+</div>
 
-- [聊下git pull --rebase](https://www.cnblogs.com/wangiqngpei557/p/6056624.html)
-
+<div>
+    <video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/SD/e8c7e5dc-6c3e-11ea-87d6-82c305a5f28d.mp4?disable_local_cache=1&amp;bu=http-com&amp;expiration=1598202560&amp;auth_key=1598202560-0-0-f2bb2e4bab5e7241e2fa3c08f46a2508&amp;f=mp4&amp;v=hw" style="object-fit: contain;"></video>
+</div>
 
 
 
