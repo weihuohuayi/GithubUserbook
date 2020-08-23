@@ -171,6 +171,20 @@
          > On branch master
          > nothing to commit, working tree clean //当前没有需要提交的修改，而且，工作目录是干净的。  
          > ~~~
+      
+   3. 忽略部分文件类型的同步
+
+      - > 1. 第一步   git命令行中进入本地仓库
+         > 1. 第二步   输入 touch .gitignore (会生成.gitignore文件)
+         > 1. 第三步  编辑.gitignore文件：
+         >
+         > > public/
+         > >
+         > > static/upload/
+         > >
+         > > .idea/
+         > >
+         > > .sh/
 
 3. #### 版本回退
 
