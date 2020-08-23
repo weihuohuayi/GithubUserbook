@@ -12,13 +12,13 @@
 
   * 仓库名称，与后期的仓库地址有关
 
-    ![1567485279169](./Github使用/1567485279169.png)
+    ![1567485279169](./img/1567485279169.png)
 
     
 
   * 仓库描述
 
-    ![1567485428375](Github使用/1567485428375.png)
+    ![1567485428375](img/1567485428375.png)
 
   <br>
   
@@ -36,7 +36,7 @@
   
   这样我们就得到了仓库的http以及ssh的地址：
   
-  ![1567485539159](Github使用/1567485539159.png)
+  ![1567485539159](img/1567485539159.png)
 <br>
 
 
@@ -89,7 +89,7 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
 
 使用自己注册时候的邮箱
 
-![1567485894532](Github使用/1567485894532.png)
+![1567485894532](img/1567485894532.png)
 
 * 查看秘钥
 
@@ -104,7 +104,7 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
 
 * 返回github，进入 Account Settings（账户配置），左边选择SSH and GPG Keys选项：
 
-  ![img](Github使用/1014657-20170507214931211-721227695.png)
+  ![img](img/1014657-20170507214931211-721227695.png)
   
   ​	title随便起个名字即可，key是第二步中的内容
   
@@ -146,17 +146,17 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
 
 1. Github仓库的项目的路径
 
-![1567490137673](Github使用/1567490137673.png)
+![1567490137673](img/1567490137673.png)
 
 2. 创建本地仓库并上传github
 
    * 我们需要将本地仓库上传至GitHub
      * 建立本地仓库
-     * 创建了一个名为“Github使用”的文件夹
+     * 创建了一个名为“img”的文件夹
      * 其下创建一些文件
      * 文件夹内右键 → git-bash
    
-   ![1567490263167](Github使用/1567490263167.png)
+   ![1567490263167](img/1567490263167.png)
    
    * 在本地创建一个文件
    
@@ -169,7 +169,7 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
    
      * 得到一个隐藏的.git文件夹，该文件夹是Git用来跟踪管理版本库的
    
-       ![1567491394252](Github使用/1567491394252.png)
+       ![1567491394252](img/1567491394252.png)
    
    * 添加README文件到本地仓库
    
@@ -183,7 +183,7 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
    
    * 远程库的地址
    
-     * ![1567490137673](Github使用/1567490137673.png)
+     * ![1567490137673](img/1567490137673.png)
      * https://github.com/weihuohuayi/GithubUserbook.git
    
    * 推送
@@ -200,7 +200,7 @@ $ ssh-keygen -t rsa -C ["**your_email@youremail.com**](mailto:"your_email@yourem
         git push -u origin master   //把本地库的所有内容推送到远程库上
         ```
      
-     ![1567490876083](Github使用/1567490876083.png)
+     ![1567490876083](img/1567490876083.png)
      
      <font color='Brown'>**推送成功 !**</font>
    
@@ -278,6 +278,3 @@ https://www.liaoxuefeng.com/wiki/896043488029600/896954848507552
 
 
 
-### 附件
-
-![](Github使用/git-cheatsheet.png)
