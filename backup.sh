@@ -11,5 +11,5 @@ git commit -m 'backup'
 # git添加远程仓库名称到origin
 git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
 
-# push将本地master分支推送到github仓库
+# push将本地master分支推送到github仓库——origin-GitUserBook
 git push origin-GitUserBook master
