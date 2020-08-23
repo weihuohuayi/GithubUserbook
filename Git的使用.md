@@ -1,18 +1,33 @@
+---
+title: Git使用手册
+date: 2020-07-25
+updated: 2020-07-27
+sidebar: 'auto'
+categories:
+ - 工具
+tags:
+ - Git
+comments: true
+keywords: Git使用手册
+---
 
 
 
+::: tip Git
 
+版本控制工具
 
+:::
 
+<img src="./img/v2-7c22ee8da303074a4a0d861a2dfa2405_1440w.jpg" alt="可冒充git大神的git tips" style="zoom:80%;" />
 
-
-## Git学习笔记
+## Git基础
 
 ### 一、Git简介
 
 - Git是目前世界上最先进的分布式版本控制系统，在处理各种项目时都十分高效，而且非常的高大上。
 - Git的工作原理 / 流程：
-   - ![img](https://pic4.zhimg.com/80/v2-aaa0c91d0d9f499fb203093ad591871b_720w.jpg)
+   - <img src="https://pic4.zhimg.com/80/v2-aaa0c91d0d9f499fb203093ad591871b_720w.jpg" alt="img" style="zoom:80%;" />
    - Workspace：工作区
    - Index / Stage：暂存区
    - Repository：仓库区（或本地仓库）
@@ -20,8 +35,12 @@
 - SVN与Git的最主要的区别？
    - SVN与Git都是版本控制系统
       - SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器获得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。而且集中式版本控制系统是必须联网才能工作。
+         - <img src="./img/34fae6cd7b899e5152abed2f55985635c8950dad.jpeg" alt="img" style="zoom: 25%;" />
+         - **优点**：简单，易学习，易操作，很多时候，只需要点点鼠标就完成了工作
+         - **缺点**：需要一台中央服务器来管理代码版本和备份，如果连不上中央服务器，就无法获取或上传代码简单，易学习，易操作，很多时候，只需要点点鼠标就完成了工作
       - Git是分布式版本控制系统，它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。
-      - <img src="./img/image-20200823155221914.png" alt="image-20200823155221914" style="zoom:50%;" />
+         - <img src="./img/d788d43f8794a4c2e4d1424217cb94d3ac6e39aa.jpeg" alt="img" style="zoom: 25%;" />
+   - <img src="./img/image-20200823155221914.png" alt="image-20200823155221914" style="zoom:50%;" />
 - 版本格式
    - <img src="./img/image-20200823154857911.png" alt="image-20200823154857911" style="zoom: 50%;" />
 
@@ -32,7 +51,7 @@
 - 打开[Git官网](https://git-for-windows.github.io/ )下载安装程序，然后按照默认选项安装即可。
 - 安装完成后，打开Git bash软件，弹出一个类似cmd的命令行窗口，证明安装成功。
 
-<img src="img/image-20200823133053120.png" alt="image-20200823133053120" style="zoom:80%;" />
+<img src="./img/image-20200823133053120.png" alt="image-20200823133053120" style="zoom:80%;" />
 
 - 安装完成后，需要进行Git 全局配置
 
@@ -64,8 +83,8 @@
    3. > 假如我们这时候报错，证明Git的用户名和密码没有配置成功，我们还可以这样做：
       >
       > - 在用户主目录下找到 .git 文件夹
-      > - ![image-20200823133348567](img/image-20200823133348567.png)
-      > - 打开 config 文件，这是专门用来配置和读取相应的工作环境变量的，在里面加上如图所示内容：![image-20200823133416391](img/image-20200823133416391.png)
+      > - <img src="./img/image-20200823133348567.png" alt="image-20200823133348567" style="zoom:80%;" />
+      > - 打开 config 文件，这是专门用来配置和读取相应的工作环境变量的，在里面加上如图所示内容：<img src="./img/image-20200823133416391.png" alt="image-20200823133416391" style="zoom: 80%;" />
       > - 或者windows7下，用户主目录下找到.gitconfig 文件，修改name和email
       > - 完成了对Git用户名和邮箱的配置
 
@@ -266,13 +285,15 @@
 - 版本库（Repository）
    - 工作区有个隐藏目录 .git ，这个不算工作区，而是 Git 的版本库。
    - 版本库里面的 index(stage) 文件叫暂存区，还有Git为我们自动创建的第一个分支 master ，以及指向 master 的一个指针叫做 HEAD。
-- <img src="img/image-20200823144339207.png" alt="image-20200823144339207" style="zoom: 80%;" />
-- ![image-20200823144421684](img/image-20200823144421684.png)
+- <img src="./img/image-20200823144339207.png" alt="image-20200823144339207" style="zoom: 80%;" />
+- <img src="./img/image-20200823144421684.png" alt="image-20200823144421684" style="zoom:80%;" />
 - 前面我们提到过，如果我们想把文件添加到Git里面时，需要分两步：
+   - <img src="./img/v2-2eddbeab4eb8d50de1a9190ec410af4c_720w.jpeg" alt="img" style="zoom:80%;" />
    - 第一步是用 git add 把文件添加进去，实际上就是把文件修改添加到暂存区。
-      - ![image-20200823144545648](img/image-20200823144545648.png)
+      - <img src="./img/image-20200823144545648.png" alt="image-20200823144545648" style="zoom:80%;" />
    - 第二步是用 git commit 提交更改，实际上就是把暂存区的所有内容提交到当前分支。（我们现在只有唯一一个分支 master，所以现在就是往 master 分支上提交更改）
-      - ![image-20200823144611519](img/image-20200823144611519.png)
+      - <img src="./img/image-20200823144611519.png" alt="image-20200823144611519" style="zoom:80%;" />
+   - 
 
 
 
@@ -302,7 +323,9 @@ A --> B3(github)
 A --> B4(gitee)
 ~~~
 
+#### 远程交互
 
+<img src="./img/v2-985e6bc6d2f9fe29387012c6b3531468_720w.jpg" alt="img" style="zoom:67%;" />
 
 #### Github
 
@@ -310,79 +333,157 @@ A --> B4(gitee)
 
 仓库分公开和私有的，公开的是免费的，私有的是收费的
 
-1. 创建仓库repository
+1. 在了解之前，先注册github账号，由于你的本地Git仓库和github仓库之间的传输是通过SSH加密的，所以需要一点设置：
 
-   - <img src="img/clip_image001.png" alt="计算机生成了可选文字: lb.com 0 Bootstrap*ü0 0 AngularJSc9Ä网Document ReactNative中文》 MarketplaceExplore 0AngularJS:API:API Newre Importrepostory Newgist Neworganization LearnGitandGitHubwithoutanycode! 0Worldguide,you'llcreatearepository,startabranch,writecomments,andopena" style="zoom:50%;" />
+   1. 第一步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果有的话，直接跳过此如下命令，如果没有的话，打开命令行，输入如下命令：
+      - ssh-keygen -t rsa –C “youremail@example.com”, 
+   2. 第二步：登录github,打开” settings”中的SSH Keys页面，然后点击“Add SSH Key”,填上任意title，在Key文本框里黏贴id_rsa.pub文件的内容。
 
-   - <img src="img/clip_image002.jpg" alt="img" style="zoom: 80%;" />
+2. 在github创建远程仓库repository
+
+   - <img src="./img/clip_image001.png" alt="计算机生成了可选文字: lb.com 0 Bootstrap*ü0 0 AngularJSc9Ä网Document ReactNative中文》 MarketplaceExplore 0AngularJS:API:API Newre Importrepostory Newgist Neworganization LearnGitandGitHubwithoutanycode! 0Worldguide,you'llcreatearepository,startabranch,writecomments,andopena" style="zoom:50%;" />
+
+   - <img src="./img/clip_image002.jpg" alt="img" style="zoom: 80%;" />
 
    - > - 如图所示填写好repository name、Description，默认选择Public，可以选择复选框Initialize this repository with a README，选择吧，点击Create repository就可以创建好用于保存网站的repository。
       > - 这个repository name没有要求，随便起，不像github的pages服务要求名字和github的账号名称一样，建议起名domainname.com，当你有多个网站要管理的话，这样就可以一眼就可以看出是那个网站了，我自己当时就不知道可以用点，所以也不知道这样来起名字。
 
+3. 在本地创建一个新仓库
+
+   - > 从网络仓库抓取下来
+     >
+     > `git clone [url]`                     下载一个项目和它的整个代码历史
+     >
+     > ~~~bash
+     > $ git clone http://git.zju.cc/practice/git-exmple.git
+     > cd git-exmple
+     > ~~~
+     >
+     > 修改本地文件后，提交
+     >
+     > ~~~bash
+     > $ git add -A
+     > $ git commit -m “这里写下你自己的记录本次提交内容的信息
+     > ~~~
+     >
+     > > - git add -A  提交所有变化
+     > > - git add -u  提交被修改(modified)和被删除(deleted)文件，不包括新文件(new)
+     > > - git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
+     >
+     > 把当前分支master推送到远程仓库上去
+     >
+     > ~~~bash
+     > $ git remote add origin-GitUserBook http://git.zju.cc/practice/git-exmple.git
+     > $ git push origin-GitUserBook master
+     > ~~~
+     >
+     > origin-GitUserBook 替代 origin作为新的仓库名，以防在提交多个仓库时候和之前的origin仓库重了。
+     >
+     > > 由于远程库是空的，我们第一次推送master分支时，加上了-u参数
+     > >
+     > > git push -u origin master
+
+4. 本地自动化
+
+   - > bash文件
+      >
+      > ~~~bash
+      > #!/usr/bin/env sh
+      > 
+      > # 提交到暂存区
+      > git add -A
+      > 
+      > # 提交到本地仓库
+      > git commit -m 'backup'
+      > 
+      > # git添加远程仓库名称到origin
+      > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
+      > 
+      > # push将本地master分支推送到github仓库——origin-GitUserBook
+      > git push origin-GitUserBook master
+      > ~~~
+
+   - > .gitignore
+      >
+      > ~~~txt
+      > .sh/
+      > ~~~
 
 
 
 
- 
 
-四、创建成功后，界面如下，可以点击README.md来编译这个文件 
 
-1. 创建一个新仓库（本地）
 
-   - 从网络仓库抓取下来
 
-   - ```bash
-      $ git clone http://git.dayuan.cc/practice/git-exmple.git
-      cd git-exmple
-      $ touch README.md
-      $ git add README.md
-      $ git commit -m "add README"
-      $ git push -u origin master
-      ```
 
-2. 在已存在的目录中创建仓库
 
-   - ```csharp
-      cd existing_folder
-      $ git init
-      $ git remote add origin http://git.dayuan.cc/practice/git-exmple.git
-      $ git add .
-      $ git commit -m "Initial commit"
-      $ git push -u origin master
-      ```
 
-3. 将本地已存在的仓库推送到远程仓库
 
-   - ```csharp
-      cd existing_repo
-      $ git remote rename origin old-origin
-      $ git remote add origin http://git.dayuan.cc/practice/git-exmple.git
-      $ git push -u origin --all
-      $ git push -u origin --tags
-      ```
 
-4. 查看分支相关命令
+ git 学习网站，依据你提交的信息，实时展示当前的分支情况
 
-   - ```ruby
-      $ git branch -r; //查看远程分支
-      $ git branch; //查看本地分支
-      $ git branch -a; //查看所有分支
-      ```
+https://link.zhihu.com/?target=https%3A//learngitbranching.js.org/
 
-5. 拉取远程分支并创建本地分支
+<div>
+    <span class="LinkCard-content"><span class="LinkCard-text"><span class="LinkCard-title" data-text="true">Learn Git Branching</span><span class="LinkCard-meta"><span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path></svg></span>learngitbranching.js.org</span></span><span class="LinkCard-imageCell"><img class="LinkCard-image LinkCard-image--horizontal" alt="图标" src="https://pic4.zhimg.com/v2-8e7132076f76bc1c65eb1f41d15e1aa8_180x120.jpg"></span></span>
+</div>
+<div>
+    <video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/SD/e8c7e5dc-6c3e-11ea-87d6-82c305a5f28d.mp4?disable_local_cache=1&amp;bu=http-com&amp;expiration=1598202560&amp;auth_key=1598202560-0-0-f2bb2e4bab5e7241e2fa3c08f46a2508&amp;f=mp4&amp;v=hw" style="object-fit: contain;"></video>
+</div>
 
-6. 
 
-   
+
+
 
 
 
 ## Git Flow开发
 
+> Git Flow 是什么
+>
+> Git Flow 是一个基于 Git 的开发流程管理的模型, 因极其适合多人协作有效地进行并行开发而被广泛用于项目流程的源代码管理.
+
+在 版本回填退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
 
 
 
-## 分支的合并
+### 查看分支
+
+~~~bash
+# 列出所有本地分支
+$ git branch
+
+# 列出所有远程分支
+$ git branch -r
+
+# 列出所有本地分支和远程分支
+$ git branch -a
+~~~
+
+
+
+
+
+
+
+
+
+### 创建分支
+
+1. 首先，我们来创建dev分支，然后切换到dev分支上。如下操作：
+
+
+
+
+
+
+
+
+
+### 一、分支的合并
+
+
 
 
 ### 场景：基于master分支的代码，开发一个新的特性

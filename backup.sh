@@ -12,4 +12,4 @@ git commit -m 'backup'
 git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
 
 # push将本地master分支推送到github仓库——origin-GitUserBook
-git push origin-GitUserBook master
+git push origin-GitUserBook dev
