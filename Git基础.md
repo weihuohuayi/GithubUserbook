@@ -194,16 +194,22 @@ keywords: Git使用手册
    3. 忽略部分文件类型的同步
 
       - > 1. 第一步   git命令行中进入本地仓库
-         > 1. 第二步   输入 touch .gitignore (会生成.gitignore文件)
-         > 1. 第三步  编辑.gitignore文件：
-         >
-         > > public/
-         > >
-         > > static/upload/
-         > >
-         > > .idea/
-         > >
-         > > .sh/
+        > 1. 第二步   输入 touch .gitignore (会生成.gitignore文件)
+        > 1. 第三步  编辑.gitignore文件：
+        >
+        > > 过滤文件夹设置：
+        > >
+        > > public/
+        > >
+        > > static/upload/
+        > >
+        > > .idea/
+        > >
+        > > 过滤文件设置： 
+        > >
+        > > *.sh
+        > >
+        > > public/do.c
 
 3. #### 版本回退
 
@@ -317,10 +323,6 @@ keywords: Git使用手册
 
 
 
-
-
-
-
 ### 附件
 
 <img src="./img/git-cheatsheet.png" style="zoom: 150%;" />
@@ -414,7 +416,7 @@ A --> B4(gitee)
       > git add -A
       > 
       > # 提交到本地仓库
-      > git commit -m 'backup'
+      > git commit -m ':bento: 更新资源文件'
       > 
       > # git添加远程仓库名称到origin
       > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
