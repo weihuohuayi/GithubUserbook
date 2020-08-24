@@ -87,6 +87,10 @@ keywords: Git使用手册
       > - 打开 config 文件，这是专门用来配置和读取相应的工作环境变量的，在里面加上如图所示内容：<img src="./img/image-20200823133416391.png" alt="image-20200823133416391" style="zoom: 80%;" />
       > - 或者windows7下，用户主目录下找到.gitconfig 文件，修改name和email
       > - 完成了对Git用户名和邮箱的配置
+      
+   4. 配置行为
+
+      - ![image-20200824150251619](./img/image-20200824150251619.png)
 
    
 
@@ -157,21 +161,33 @@ keywords: Git使用手册
         > ~~~
         >
         > 上面的命令反馈告诉我们，README.md 文件被修改过了，但还没有准备提交的修改。
-        
-      - 如果我们想知道上次是怎么修改readme.txt 文件的，需要用 `git diff` 命令
-      
+        >
+        > 此时提供两种方案进行后续操作
+        >
+        > 1. `git add <file>...`添加到暂存区
+        > 1. `git checkout -- <file>...`恢复到修改之前
+
+      - 此时遇到问题：忘记了修改了什么内容，或者别人修改的，自己不知道应该进行保留添加到暂存区还是删除恢复到修改之前的状态？
+
+      - 需要用 `git diff` 命令获取readme.txt 文件怎么修改的
+
       - ~~~bash
          $ git diff readme.txt 
          diff --git a/readme.txt b/readme.txt
          index 46d49bf..9247db6 100644
-         --- a/readme.txt
-         +++ b/readme.txt
+         --- a/readme.txt   //版本仓库的
+         +++ b/readme.txt   //工作区的
          @@ -1,2 +1,2 @@
          -Git is a version control system. //这一句是被删掉的
          +Git is a distributed version control system. //这一句是新添加的
          Git is free software.
+         
+
+         //比较不同版本的差异
+         $ git diff "HEAD^" HEAD         
+         $ git diff head@{1} head@{0} 
          ~~~
-      
+         
       - > 对修改的文件进行添加`git add`与提交`git commit`
          >
          > ~~~bash
@@ -190,8 +206,8 @@ keywords: Git使用手册
          > On branch master
          > nothing to commit, working tree clean //当前没有需要提交的修改，而且，工作目录是干净的。  
          > ~~~
-      
-   3. 忽略部分文件类型的同步
+
+   3. 忽略文件
 
       - > 1. 第一步   git命令行中进入本地仓库
         > 1. 第二步   输入 touch .gitignore (会生成.gitignore文件)
@@ -199,11 +215,11 @@ keywords: Git使用手册
         >
         > > 过滤文件夹设置：
         > >
-        > > public/
+        > > /public/
         > >
-        > > static/upload/
+        > > /static/upload/
         > >
-        > > .idea/
+        > > /.idea/
         > >
         > > 过滤文件设置： 
         > >
@@ -230,10 +246,10 @@ keywords: Git使用手册
 
       2. 到目前为止，readme.txt 文件一共有三个版本被提交到了 Git 仓库里
 
-          - 用 git log 命令进行查看
+          - 用 `git log` 命令查看提交日志
 
           - ~~~bash
-             $ git log //查看历史记录
+             $ git log //查看历史记录（commit 的版本日志 包含提交的版本 操作者 日期）
 
              commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (HEAD -> master)
              Author: Michael Liao <askxuefeng@gmail.com>
@@ -261,45 +277,68 @@ keywords: Git使用手册
              e475afc93c209a690c39c13a46716e8fa000c366 add distributed
              eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0 wrote a readme file 
              ~~~
+       
+          - `git log origin/master`查看远程仓库的提交日志
 
-      1. 现在如果我们想把 readme.txt 文件退回到上一个版本，就可以使用 git reset 命令
+          - 更强大的 `git reflog` 命令查看命令操作历史
+      
+          - ~~~
+              $ git reflog   //查找到所有分支的所有操作记录，包括删除的以及reset的内容
+        bacf721 HEAD@{0}: commit: append GPL
+              535537e HEAD@{1}: commit: :bento: 更新资源文件
+              521014e HEAD@{2}: commit: add distributed
+              ~~~
 
-          - ~~~bash
+          - 
+      
+      3. 现在如果我们想把 readme.txt 文件退回到上一个版本，就可以使用 `git reset` 命令
+      
+    - ~~~bash
              $ git reset --hard HEAD^ 
-             HEAD is now at e475afc add distributed
+       HEAD is now at e475afc add distributed
              ~~~
 
           - > HEAD表示当前版本，则HEAD^ 表示上一个版本，那么上上版本就是HEAD^^
-          
-      4. 现在想要回到最新的版本，还是使用 git reset 命令
+       >
+             > ~~~bash
+       > //比较不同版本的差异
+             > $ git diff "HEAD^" HEAD         
+             > $ git diff head@{1} head@{0} 
+             > ~~~
+       >
+             > 
+
+      4. 现在想要回到最新的版本，还是使用 `git reset` 命令
 
           - ~~~bash
-             $ git reset --hard 1094a
+       $ git reset --hard 1094a
              HEAD is now at 83b0afe append GPL
              ~~~
-
-          - >  这里不能用HEAD而必须使用 commit id ，因为最新版本在之前返回时已经被删除了，1094a就是最新版本的 commit id，可以在之前的代码中查到
-
+      
+    - >  这里不能用HEAD而必须使用 commit id ，因为最新版本在之前返回时已经被删除了，1094a就是最新版本的 commit id，可以在之前的代码中查到
+      
+          - ![image-20200824161444701](./img/image-20200824161444701.png)
+      
       5. `git reset`使用图示
-
+      
           - ![img](img/18747624-3329e55d0a95f128.png)
-
+      
           - 其中：A 和 B 是正常提交，而 C 和 D 是错误提交。现在，我们想把 C 和 D 回退掉。而此时，HEAD 指针指向 D 提交（5lk4er）。我们只需将 HEAD 指针移动到 B 提交（a0fvf8），就可以达到目的。
-
+      
           - ~~~bash
              $ git reset --hard a0fvf8
              ~~~
-
+      
           - 命令运行之后，HEAD 指针就会移动到 B 提交下
-
+      
           - <img src="img/18747624-5840c2017c6964b2.png" alt="img" style="zoom:80%;" />
-
+      
           - 而这个时候，远程仓库的 HEAD 指针依然不变，仍在 D 提交上。所以，如果直接使用`git push`命令的话，将无法将更改推到远程仓库。此时，只能使用`-f` 选项将提交强制推到远程仓库：
-
+      
           - ~~~bash
              $ git push -f
              ~~~
-
+      
       6. `git revert`
 
 
@@ -370,7 +409,7 @@ A --> B4(gitee)
    - > - 如图所示填写好repository name、Description，默认选择Public，可以选择复选框Initialize this repository with a README，选择吧，点击Create repository就可以创建好用于保存网站的repository。
       > - 这个repository name没有要求，随便起，不像github的pages服务要求名字和github的账号名称一样，建议起名domainname.com，当你有多个网站要管理的话，这样就可以一眼就可以看出是那个网站了，我自己当时就不知道可以用点，所以也不知道这样来起名字。
 
-3. 在本地创建一个新仓库
+3. `git clone git@host:path`本地无仓库，将远程仓库抓取下来，进行远程交互
 
    - > 从网络仓库抓取下来
      >
@@ -401,11 +440,29 @@ A --> B4(gitee)
      >
      > origin-GitUserBook 替代 origin作为新的仓库名，以防在提交多个仓库时候和之前的origin仓库重了。
      >
-     > > 由于远程库是空的，我们第一次推送master分支时，加上了-u参数
+     > > 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，这样设置默认值后，每次只要`git push`即可
      > >
      > > git push -u origin master
+     
+   - `git push`
 
-4. 本地自动化
+      - ~~~bash
+         $ git push [-u] <remote repository> <local branch>:<remote branch>
+         ~~~
+
+      - 
+
+4. `git init` 和  `remote add`本地已新建仓库，与远程仓库进行关联，进行交互
+
+   - ~~~bash
+      $ git remote add [remote name] [url]
+      即：
+      $ git remote add origin关联远程仓库地址的代号 git@host:path
+      ~~~
+
+   - > url支持http协议和shh协议
+
+5. 本地自动化
 
    - > bash文件
       >
@@ -418,7 +475,7 @@ A --> B4(gitee)
       > # 提交到本地仓库
       > git commit -m ':bento: 更新资源文件'
       > 
-      > # git添加远程仓库名称到origin
+      > # git添加远程仓库地址到origin名称，建立关联
       > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
       > 
       > # push将本地master分支推送到github仓库——origin-GitUserBook
@@ -445,11 +502,19 @@ A --> B4(gitee)
 
 ## 推荐连接
 
- [git 学习网站，依据你提交的信息，实时展示当前的分支情况](https://link.zhihu.com/?target=https%3A//learngitbranching.js.org/)
+ [git 学习网站，依据你提交的信息，实时展示当前的分支情况](https://learngitbranching.js.org/)
 
 <div>
+    <a target="_blank" href="https://learngitbranching.js.org/" data-draft-node="block"
+  data-draft-type="link-card" data-image="https://pic2.zhimg.com/v2-f63c28a54be0362584d3ecad72417ae9_ipico.jpg"
+  data-image-width="2048" data-image-height="2048" class="LinkCard LinkCard--hasImage" data-za-detail-view-id="172">
+    <span class="LinkCard-backdrop"
+    style="background-image:url(https://pic2.zhimg.com/v2-f63c28a54be0362584d3ecad72417ae9_ipico.jpg)">
+  </span>
     <span class="LinkCard-content"><span class="LinkCard-text"><span class="LinkCard-title" data-text="true">Learn Git Branching</span><span class="LinkCard-meta"><span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path></svg></span>learngitbranching.js.org</span></span><span class="LinkCard-imageCell"><img class="LinkCard-image LinkCard-image--horizontal" alt="图标" src="https://pic4.zhimg.com/v2-8e7132076f76bc1c65eb1f41d15e1aa8_180x120.jpg"></span></span>
+    </a>
 </div>
+
 
 <div>
     <video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/SD/e8c7e5dc-6c3e-11ea-87d6-82c305a5f28d.mp4?disable_local_cache=1&amp;bu=http-com&amp;expiration=1598202560&amp;auth_key=1598202560-0-0-f2bb2e4bab5e7241e2fa3c08f46a2508&amp;f=mp4&amp;v=hw" style="object-fit: contain;"></video>
