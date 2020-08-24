@@ -2,7 +2,7 @@
 
 # 定义文本类型——可执行文件
 
-echo github
+echo 更新资源提交到暂存区
 
 # 提交到暂存区
 git add -A
