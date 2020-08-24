@@ -6,7 +6,7 @@
 git add -A
 
 # 提交到本地仓库
-git commit -m 'backup'
+git commit -m ':bento: 更新资源文件'
 
 # git添加远程仓库名称到origin
 git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
