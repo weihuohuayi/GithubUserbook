@@ -23,29 +23,44 @@ keywords: Git使用手册
 
 
 
-## 功能分支工作流
-
-<img src="./img/v2-71801fd1e3238598699f2b4459302036_720w.jpg" alt="img" style="zoom:150%;" />
 
 
-
----
-
-
-
-## Git Flow开发
+## Git Flow
 
 > Git Flow 是什么
 >
 > Git Flow 是一个基于 Git 的开发流程管理的模型, 因极其适合多人协作有效地进行并行开发而被广泛用于项目流程的源代码管理.
 
-在 版本回填退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
+- 在版本回退里，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。
 
-Gitflow 工作流是目前非常成熟的一个方案，它定义了一个围绕项目发布的严格分支模型，通过为代码研发、项目发布以及维护分配独立的分支来让项目的迭代过程更加地顺畅，不同于之前的集中式工作流以及功能分支工作流，gitflow 工作流常驻的分支有两个：主干分支 master、开发分支 dev，此外针对项目研发的各个阶段，设定了特定的分支。
+   - 截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。
+   - <font color='blue'>HEAD严格来说不是指向提交，而是指向master，</font>master才是指向提交的，所以，HEAD指向的就是当前分支。
 
-> **阶段分支**常驻 master、dev 研发 feature 热修复 hotfix 发布 release
+- Gitflow 工作流是目前非常成熟的一个方案，它打破单支模型工作流，定义了一个围绕项目发布的严格<font color='blue'>分支模型</font>，通过为代码研发、项目发布以及维护分配独立的分支来让项目的迭代过程更加地顺畅
 
-<img src="./img/v2-392d33ec8ce48137b8c3bb35284f7caf_720w.jpg" alt="img" style="zoom:150%;" />
+- 不同于之前的集中式工作流以及功能分支工作流，gitflow 工作流常驻的分支有两个：<font color='blue'>主干分支 master、开发分支 dev</font>，此外针对项目研发的各个阶段，设定了特定的分支。
+
+- > **阶段分支**常驻 master、dev 研发 feature 热修复 hotfix 发布 release等，见下图
+
+- <img src="./img/v2-392d33ec8ce48137b8c3bb35284f7caf_720w.jpg" alt="img" style="zoom:150%;" />
+
+
+
+## 分支模型优势
+
+> ### 场景设定：基于master分支的代码，开发一个新的特性
+
+- :notebook_with_decorative_cover: 如果你直接在master分支上开发这个新特性，是不好的
+   - 万一你在开发`特性1`的时候，领导突然又要叫你去开发`特性2`，就不好处理了。
+   - 难道开发的两个特性都提交到master？一会儿提交特性1的commit，一会儿提交特性2的commit？这会导致commit记录很混乱。
+- 所以，建议的做法是：给每个特性都单独建一个的新的分支。
+- <img src="./img/v2-71801fd1e3238598699f2b4459302036_720w.jpg" alt="img" style="zoom:150%;" />
+
+
+
+
+
+## Git Flow规定的常见分支
 
 <img src="./img/18747624-2271fe92cb80f2fb.png" alt="img" style="zoom:150%;" />
 
@@ -90,6 +105,8 @@ Gitflow 工作流是目前非常成熟的一个方案，它定义了一个围绕
 
 
 
+## 分支操作与应用
+
 ### 一、查看分支
 
 ~~~bash
@@ -112,34 +129,37 @@ $ git branch -a
 - ~~~bash
    $ git branch dev         //创建dev分支
    $ git checkout dev       //切换到dev分支
-   ~~~
+   
+	$ git branch
+   * dev
+     master
 
-- ~~~bash
-   $ git checkout –b dev     //创建+切换分支
-   $ git merge name          //合并某分支到当前分支
+   $ git checkout –b dev     //创建指定分支+切换当前分支到指定分支上
+
+   $ git merge name          //合并某分支到当前分支(一般会先切换到master分支上，再合并其他分支)
    $ git branch –d name      //删除分支
    ~~~
 
-- 
+
+
+### 三、合并分支
+
+- 快速合并
+   - ![image-20200826120027171](./img/image-20200826120027171.png)![image-20200826120040712](./img/image-20200826120040712.png)
+   - <img src="./img/image-20200826120125773.png" alt="image-20200826120125773" style="zoom: 67%;" /> <img src="./img/image-20200826120759112.png" alt="image-20200826120759112" style="zoom:67%;" /><img src="img/image-20200826120139873.png" alt="image-20200826120139873" style="zoom:67%;" />
+- 非快速合并（不同分支对同一内容进行了不同的修改后，进行合并时候，会发生冲突）
+   - ![image-20200826122515870](./img/image-20200826122515870.png)
+   - 
 
 
 
-### 三、分支的合并
+#### 案例应用
 
+比如说，我专门建立一个`特性1`，为其建一个分支`feature_item_recommend`。具体做法如下：
 
+- （1）基于master分支，创建一个新的分支，起名为`feature_item_recommend`：
 
-
-### 场景：基于master分支的代码，开发一个新的特性
-
-如果你直接在master分支上开发这个新特性，是不好的，万一你在开发`特性1`的时候，领导突然又要叫你去开发`特性2`，就不好处理了。难道开发的两个特性都提交到master？一会儿提交特性1的commit，一会儿提交特性2的commit？这会导致commit记录很混乱。
-
-所以，我给你的建议做法是：给每个特性都单独建一个的新的分支。
-
-比如说，我专门给`特性1`建一个分支`feature_item_recommend`。具体做法如下：
-
-（1）基于master分支，创建一个新的分支，起名为`feature_item_recommend`：
-
-```
+```bash
 $ git checkout -b feature_item_recommend
 
 Switched to a new branch 'feature_item_recommend'
@@ -154,10 +174,9 @@ $ git branch feature_item_recommend    // 创建新的分支
 $ git checkout feature_item_recommend  //切换到新的分支
 ```
 
+- （2）在新的分支`feature_item_recommend`上，完成开发工作，并 commit 、push。
 
-（2）在新的分支`feature_item_recommend`上，完成开发工作，并 commit 、push。
-
-（3）将分支`feature_item_recommend`上的开发进度**合并**到master分支：
+- （3）将分支`feature_item_recommend`上的开发进度**合并**到master分支：
 
 ```bash
 $ git checkout master  //切换到master分支
@@ -318,3 +337,7 @@ git cherry-pick commit1
 
 
 
+
+   ~~~
+
+   ~~~

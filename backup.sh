@@ -1,5 +1,7 @@
 ﻿#!/usr/bin/env sh
 
+echo 开始更新资源
+
 # 定义文本类型——可执行文件
 
 echo 更新资源添加到暂存区
@@ -20,4 +22,10 @@ git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.
 
 echo 推送本地更新到远程仓库
 # push将本地master分支推送到github仓库——origin-GitUserBook
-git push origin-GitUserBook master
+# git push origin-GitUserBook master
+
+# push将本地master分支推送到github仓库——origin-GitUserBook
+git push origin-GitUserBook dev
+
+
+echo 更新资源推送完毕

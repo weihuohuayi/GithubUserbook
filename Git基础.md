@@ -465,23 +465,27 @@ A --> B4(gitee)
 5. 本地自动化
 
    - > bash文件
-      >
-      > ~~~bash
-      > #!/usr/bin/env sh
-      > 
-      > # 提交到暂存区
-      > git add -A
-      > 
-      > # 提交到本地仓库
-      > git commit -m ':bento: 更新资源文件'
-      > 
-      > # git添加远程仓库地址到origin名称，建立关联
-      > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
-      > 
-      > # push将本地master分支推送到github仓库——origin-GitUserBook
-      > git push origin-GitUserBook master
-      > ~~~
-
+     >
+     > ~~~bash
+     > #!/usr/bin/env sh
+     > 
+     > echo 开始更新资源
+     > 
+     > # 提交到暂存区
+     > git add -A
+     > 
+     > # 提交到本地仓库
+     > git commit -m ':bento: 更新资源文件'
+     > 
+     > # git添加远程仓库地址到origin名称，建立关联
+     > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
+     > 
+     > # push将本地master分支推送到github仓库——origin-GitUserBook
+   > git push origin-GitUserBook master
+     > 
+     > echo 更新资源推送完毕
+     > ~~~
+     
    - > .gitignore
       >
       > ~~~txt

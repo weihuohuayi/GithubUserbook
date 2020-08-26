@@ -82,6 +82,7 @@ You can initialize this repository with code from a Subversion, Mercurial, or TF
 
 #### 在本地创建ssh key：
 
+* ssh key优点：git push推送仓库时候，不需要输入用户名密码
 * 右键 → git-bash
 * 设置SSH_Key
 
