@@ -6,6 +6,9 @@ echo 开始更新资源
 
 echo 更新资源添加到暂存区
 
+# 清理缓存
+git rm --cached . 
+
 # 提交到暂存区
 git add -A
 
@@ -30,5 +33,7 @@ echo 推送本地更新到远程仓库
 # push将本地dev分支推送到github仓库——origin-GitUserBook  的  dev分支
 git push origin-GitUserBook dev
 
+# 强制推送
+# git push -f origin-GitUserBook dev
 
 echo 更新资源推送完毕
