@@ -24,7 +24,10 @@ echo 推送本地更新到远程仓库
 # push将本地master分支推送到github仓库——origin-GitUserBook
 # git push origin-GitUserBook master
 
-# push将本地master分支推送到github仓库——origin-GitUserBook
+# push将本地dev分支推送到github仓库——origin-GitUserBook  并同步新建远程dev分支进行对应
+# git push origin-GitUserBook dev:dev
+
+# push将本地dev分支推送到github仓库——origin-GitUserBook  的  dev分支
 git push origin-GitUserBook dev
 
 

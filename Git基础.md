@@ -277,17 +277,17 @@ keywords: Git使用手册
              e475afc93c209a690c39c13a46716e8fa000c366 add distributed
              eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0 wrote a readme file 
              ~~~
-       
+      
           - `git log origin/master`查看远程仓库的提交日志
 
           - 更强大的 `git reflog` 命令查看命令操作历史
       
           - ~~~
               $ git reflog   //查找到所有分支的所有操作记录，包括删除的以及reset的内容
-        bacf721 HEAD@{0}: commit: append GPL
+          bacf721 HEAD@{0}: commit: append GPL
               535537e HEAD@{1}: commit: :bento: 更新资源文件
               521014e HEAD@{2}: commit: add distributed
-              ~~~
+            ~~~
 
           - 
       
@@ -296,7 +296,7 @@ keywords: Git使用手册
     - ~~~bash
              $ git reset --hard HEAD^ 
        HEAD is now at e475afc add distributed
-             ~~~
+       ~~~
 
           - > HEAD表示当前版本，则HEAD^ 表示上一个版本，那么上上版本就是HEAD^^
        >
@@ -480,13 +480,12 @@ A --> B4(gitee)
      > # git添加远程仓库地址到origin名称，建立关联
      > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
      > 
-     > # push将本地master分支推送到github仓库——origin-GitUserBook
-   > git push origin-GitUserBook master
+     > # push将本地master分支推送到github仓库——origin-GitUserBook 的主要分支——master分支
+     > git push origin-GitUserBook master
      > 
      > echo 更新资源推送完毕
      > ~~~
-     
-   - > .gitignore
+   - > .gitignore文件
       >
       > ~~~txt
       > .sh/

@@ -253,9 +253,55 @@ Git 没有简单地把分支指针右移，而是对三方合并的结果作一�
 这个时候在对两个分支合并，git不会产生冲突，因为两个分支是修改同一文件的不同位置。
 git自动合并成功。不管是git自动合并成功，还是在人工解决冲突下合并成功，提交之前，都要对代码进行测试。
 
-## 日常操作积累
 
-### 修改密码（曲线救国）
+
+
+
+
+
+
+
+本地自动化
+
+- > bash文件
+   >
+   > ~~~
+   > #!/usr/bin/env sh
+   > 
+   > echo 开始更新资源
+   > 
+   > # 提交到暂存区
+   > git add -A
+   > 
+   > # 提交到本地仓库
+   > git commit -m ':bento: 更新资源文件'
+   > 
+   > # git添加远程仓库地址到origin名称，建立关联
+   > git remote add origin-GitUserBook https://github.com/weihuohuayi/GithubUserbook.git
+   > 
+   > # push将本地master分支推送到github仓库——origin-GitUserBook 的主要分支——master分支
+   > git push origin-GitUserBook master
+   > 
+   > # push将本地新建dev分支推送到github仓库 并同时新建远程dev分支进行对应
+   > git push origin-GitUserBook dev:dev
+   > 
+   > # push将本地新建dev分支再次推送到github仓库dev分支
+   > git push origin-GitUserBook dev
+   > 
+   > echo 更新资源推送完毕
+   > ~~~
+   >
+   > 
+
+
+
+---
+
+
+
+## 日常bug操作积累
+
+### 一、修改密码（曲线救国）
 
 
 > 网上查了很久，没找到答案。最终，在cld童鞋的提示下，采取如下方式进行曲线救国。
@@ -273,7 +319,7 @@ git config user.name "smyhvae"
 ```
 
 
-### 修改已经push的某次commit的作者信息
+### 二、修改已经push的某次commit的作者信息
 
 已经push的记录，如果要修改作者信息的话，只能 通过--force命令。我反正是查了很久，但最终还是不敢用公司的仓库尝试。
 
@@ -288,13 +334,15 @@ git config user.name "smyhvae"
 
 
 
-### 将 `branch1`的某个`commit1`合并到`branch2`当中
+### 三、将 `branch1`的某个`commit1`合并到`branch2`当中
 
 切换到branch2中，然后执行如下命令：
 
 ```
 git cherry-pick commit1
 ```
+
+---
 
 
 
